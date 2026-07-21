@@ -1,0 +1,78 @@
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>js and html test</title>
+ 
+ <style> 
+
+  body {
+   background-color: white;
+   min-height: 100vh;
+   position: relative;
+   margin: 0;
+  }
+
+  button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  padding: 10px 20px;
+  }
+  button:active {
+    transform: translate(-50%, -50%)
+  }
+  #counter {
+   position: absolute;
+   top: 0px;
+   right: 200px;
+   font-size: 48px;
+   user-select: none;
+   outline: none;
+   padding: 0;
+   margin: 0;
+  }
+  h1 {
+    position: absolute;
+  }
+ </style>
+</head>
+<body>
+<h1 id="1">this is a text that grows when you click the page</h1>
+<h2 id="counter">0</h2>
+<button id="ResetButton">Reset</button>
+<script>
+function getRandomColor() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return 'rgb (${r}, ${g}, ${b})';
+}
+const h1 = document.getElementById("1");
+let size = 32;
+let clicks = 0;
+const counter = document.getElementById("counter");
+document.body.addEventListener("click", () => {
+  if (event.target.id === "ResetButton") return;
+    document.body.style.backgroundColor = getRandomColor();
+    size += 5;
+    h1.style.fontSize = size + "px";
+    clicks++;
+    counter.textContent = clicks;
+    
+  });
+const ResetButton = document.getElementById("ResetButton");
+ResetButton.addEventListener("click", (event) => {
+    event.stopPropagation();
+    document.body.style.backgroundColor = "white";
+    const h1 = document.getElementById("1");
+    clicks = 0;
+    counter.textContent = 0;
+    size = 32;
+    h1.style.fontSize = size + "px";
+});
+ </script>
+</body>
